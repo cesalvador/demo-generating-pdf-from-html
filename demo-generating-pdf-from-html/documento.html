@@ -1,0 +1,1047 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Hojas de estilo en documentos HTML</title>
+<link rel="previous" href="../struct/objects.html">
+<link rel="next" href="graphics.html">
+<link rel="contents" href="../cover.html#toc">
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css">
+<link rel="STYLESHEET" href="../style/default.css" type="text/css">
+</head>
+<body>
+<div class="navbar" align="center">
+&nbsp;<a href="../struct/objects.html">anterior</a>
+&nbsp;<a href="graphics.html">siguiente</a>
+&nbsp;<a href="../cover.html#minitoc">contenidos</a>
+&nbsp;<a href="../index/elements.html">elementos</a>
+&nbsp;<a href="../index/attributes.html">atributos</a>
+&nbsp;<a href="../index/list.html">índice</a> 
+<hr></div>
+
+<h1 align="center"><a name="h-14">14</a> <a name="stylesheets">Hojas de estilo</a></h1>
+
+<div class="ntrad">
+<p><strong>Nota:</strong> Este documento es parte de una traducción al castellano de la Recomendación del W3C "HTML 4.01 Specification" (<a href="../cover.html">más información</a>). Puede consultar la <a href="http://www.w3.org/TR/1999/REC-html401-19991224/present/styles.html">versión original</a> del mismo. Para cualquier comentario o corrección acerca de la traducción póngase en contacto con el traductor en jrpozo <span>arroba</span> conclase punto net. Gracias por su colaboración.</p>
+<p>Véase el <a href="../cover.html#aviso-de-copyright">Aviso de copyright</a> de la traducción.</p>
+</div>
+
+<div class="subtoc">
+<p><strong>Contenidos</strong></p>
+
+<ol>
+<li><a class="tocxref" href="#h-14.1">Introducción a las hojas de estilo</a></li>
+
+<li><a class="tocxref" href="#h-14.2">Añadir estilos al HTML</a> 
+
+<ol>
+<li><a class="tocxref" href="#h-14.2.1">Especificación del lenguaje de hojas de estilo por defecto</a></li>
+
+<li><a class="tocxref" href="#h-14.2.2">Información de estilo en línea</a></li>
+
+<li><a class="tocxref" href="#h-14.2.3">Información de estilo en cabecera: el elemento <samp
+class="einst2">STYLE</samp></a></li>
+
+<li><a class="tocxref" href="#h-14.2.4">Tipos de medios</a></li>
+</ol>
+</li>
+
+<li><a class="tocxref" href="#h-14.3">Hojas de estilo externas</a> 
+
+<ol>
+<li><a class="tocxref" href="#h-14.3.1">Hojas de estilo preferentes y alternativas</a></li>
+
+<li><a class="tocxref" href="#h-14.3.2">Especificación de hojas de estilo externas</a></li>
+</ol>
+</li>
+
+<li><a class="tocxref" href="#h-14.4">Hojas de Estilo en Cascada</a> 
+
+<ol>
+<li><a class="tocxref" href="#h-14.4.1">Cascadas dependientes del medio</a></li>
+
+<li><a class="tocxref" href="#h-14.4.2">Herencia y cascada</a></li>
+</ol>
+</li>
+
+<li><a class="tocxref" href="#h-14.5">Ocultar datos de estilo a los agentes de usuario</a></li>
+
+<li><a class="tocxref" href="#h-14.6">Vinculación de hojas de estilo mediante encabezados HTTP</a></li>
+</ol>
+</div>
+
+<h2><a name="h-14.1">14.1</a> <span class="index-inst" title="style 
+sheet::introduction to"><a name="idx-style_sheet-3">Introducción a las hojas de estilo</a></span></h2>
+
+<p>Las hojas de estilo representan un avance importante para los diseñadores de páginas web,
+al darles un mayor rango de posibilidades para mejorar la apariencia de sus páginas.
+En los entornos científicos en que la Web fue concebida, la gente estaba más
+preocupada por el contenido de sus páginas que por su presentación. A medida
+que la Web era descubierta por un espectro mayor de personas de distintas procedencias,
+las limitaciones del HTML se convirtieron en fuente de continua frustración,
+y los autores se vieron forzados a superar las limitaciones estilísticas del HTML.
+Aunque las intenciones han sido buenas -- mejorar la presentación de las páginas
+web --, las técnicas para conseguirlo han tenido efectos secundarios negativos.
+Entre estas técnicas, que dan buenos resultados para algunas personas, algunas
+veces, pero no siempre ni para todas las personas, se incluyen:</p>
+
+<ul>
+<li>La utilización de extensiones propietarias del HTML</li>
+
+<li>Conversión del texto en imágenes</li>
+
+<li>Utilización de imágenes para controlar el espacio en blanco</li>
+
+<li>La utilización de tablas para la organización de las páginas</li>
+
+<li>Escribir programas en lugar de usar HTML</li>
+</ul>
+
+<p>Estas técnicas incrementan considerablemente la complejidad de las
+páginas web, ofrecen una flexibilidad limitada, sufren de problemas de
+interoperabilidad, y crean dificultades para las personas con
+discapacidades.</p>
+
+<p>Las hojas de estilo resuelven estos problemas al mismo tiempo que
+reemplazan al limitado rango de mecanismos de presentación del HTML.
+Con las hojas de estilo es más fácil especificar la cantidad de espacio
+entre líneas, el sangrado de las líneas, los colores a utilizar para el
+texto y el fondo, el tamaño y estilo de las fuentes, y otros muchos
+detalles.</p>
+
+<div class="example">
+<p>Por ejemplo, la siguiente hoja de estilo CSS (almacenada en el fichero
+"especial.css") hace que el color del texto de un párrafo sea verde ("green")
+y lo rodea de un borde rojo ("red") continuo ("solid"):</p>
+
+<pre>
+P.especial {
+color : green;
+border: solid red;
+}
+</pre>
+
+<p>Los autores pueden vincular esta hoja de estilo a su documento fuente HTML
+con el elemento <a href="../struct/links.html#edef-LINK" class="noxref"><samp
+class="einst">LINK</samp></a>:</p>
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Un documento con una hoja de estilo externa&lt;TITLE&gt;
+    &lt;LINK href="especial.css" rel="stylesheet" type="text/css"&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P class="especial"&gt;Este párrafo debería tener texto especial verde.
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+</div>
+
+<p>HTML 4 soporta las siguientes características de hojas de estilo:</p>
+
+<dl>
+<dt><b>Colocación flexible de la información de estilo</b></dt>
+
+<dd>Al colocar las hojas de estilo en ficheros separados es más fácil
+reutilizarlas. Algunas veces es útil incluir instrucciones de representación
+dentro del documento al que se aplican, ya sea agrupadas al comienzo del documento,
+o en atributos de los elementos a lo largo del cuerpo del documento. Para
+facilitar la gestión de estilos a nivel de sitio, esta especificación describe
+cómo utilizar los encabezados HTTP para especificar qué hojas de estilo se
+aplican a un documento.</dd>
+
+<dt><b>Independencia de lenguajes de hojas de estilo específicos</b></dt>
+
+<dd>Esta especificación no liga el HTML con ningún lenguaje de hojas de estilo
+en particular. Esto permite que se puedan usar otros lenguajes diferentes,
+desde los lenguajes más simples válidos para la mayoría de los usuarios, hasta los más
+complejos, útiles para una minoría de usuarios con necesidades muy especializadas.
+Todos los ejemplos que se incluyen en lo que sigue se sirven del lenguaje CSS
+(Hojas de Estilo en Cascada, Cascading Style Sheets, <a rel="biblioentry" href= 
+"../references.html#ref-CSS1" class="informref">[CSS1]</a>), pero también
+son posibles otros lenguajes de hojas de estilo.</dd>
+
+<dt><b>Cascada</b></dt>
+
+<dd>Se llama así a la capacidad que proporcionan algunos lenguajes
+de hojas de estilo tales como CSS que permiten que las informaciones de estilo provenientes
+de varias fuentes puedan combinarse. Éstas podrían ser, por ejemplo, las guías
+de estilo de una empresa, los estilos comunes a un grupo de documentos, y los estilos
+específicos de un documento en particular. Al almacenarse independientemente,
+las hojas de estilo pueden reutilizarse, lo cual simplifica las tareas de
+diseño y hace más efectiva la utilización de la memoria caché de la red.
+La cascada define una secuencia ordenada de hojas de estilo en la que las
+reglas de las últimas hojas tienen una prioridad mayor que las de las primeras.
+No todos los lenguajes de hojas de estilo soportan la cascada.</dd>
+
+<dt><span class="index-inst" title="accessibility::and style sheets"><a name= 
+"idx-accessibility"><b>Dependencias de los medios</b></a></span></dt>
+
+<dd>HTML permite a los autores especificar sus documentos de una manera independiente
+del medio. Esto permite a los usuarios acceder a las páginas web usando una
+amplia gama de dispositivos y medios, p.ej., pantallas gráficas para ordenadores
+bajo Windows, Macintosh OS y X11, dispositivos para aparatos de televisión,
+teléfonos adaptados y dispositivos portátiles PDA, navegadores basados en voz,
+y dispositivos táctiles Braille.
+
+<p>Las hojas de estilo, en contraste, se aplican a medios o grupos de medios
+específicos. Una hoja de estilo diseñada para una pantalla puede ser aplicable
+para una salida impresa, pero es de poca utilidad para los navegadores basados en voz.
+Esta especificación le permite definir categorías generales de medios a los
+que es aplicable una hoja de estilo dada. Esto permite a los agentes de usuario
+evitar la descarga de hojas de estilo que no sean apropiadas. Los lenguajes
+de hojas de estilo pueden incluir características para describir dependencias
+del medio dentro de una misma hoja de estilo.</p>
+</dd>
+
+<dt><b>Estilos alternativos</b></dt>
+
+<dd>Los autores pueden querer ofrecer a los lectores varias maneras
+diferentes de ver un documento. Por ejemplo, una hoja de estilo para
+representar documentos compactos con fuentes pequeñas, o una que especifique
+fuentes más grandes para una lectura más fácil. Esta especificación permite
+a los autores especificar una hoja de estilo preferente así como hojas
+alternativas que se dirijan a medios o usuarios específicos. Los agentes
+de usuario deberían dar a los usuarios la oportunidad de seleccionar una de
+las hojas de estilo alternativas o incluso de desactivar las hojas de estilo
+completamente.</dd>
+
+<dt><b>Consideraciones de rendimiento</b></dt>
+
+<dd>Algunas personas han expresado su preocupación acerca de los posibles problemas
+de rendimiento relacionados con las hojas de estilo. Por ejemplo, la
+obtención de una hoja de estilo externa puede retrasar la presentación
+del documento al usuario. Algo parecido sucede si la cabecera del
+documento contiene un conjunto muy grande de reglas de estilo.
+
+<p>La propuesta actual resuelve estos problemas, pues permite a los autores
+incluir instrucciones de representación dentro de cada elemento HTML. Así,
+la información de representación siempre estará disponible en el momento
+en que el agente de usuario quiera representar cada elemento.</p>
+
+<p>En muchos casos los autores sacarán partido de una hoja de estilo común
+a un grupo de documentos. En este caso, la distribución de reglas de estilo
+a lo largo del documento conducirá a un rendimiento peor que si se usara
+una hoja de estilo vinculada, ya que para la mayoría de los documentos la
+hoja de estilo ya estará almacenada en la caché local. La disponibilidad
+pública de hojas de estilo de calidad potenciará este efecto.</p>
+</dd>
+</dl>
+
+<h2><a name="h-14.2">14.2</a> Añadir estilos al HTML</h2>
+
+<div class="note">
+<p><em><strong>Nota.</strong> La hoja de estilo por defecto del HTML 4 que se incluye
+en <a rel="biblioentry" href="../references.html#ref-CSS2" class= 
+"informref">[CSS2]</a> expresa la información de estilo por defecto generalmente
+aceptada para cada elemento. Los autores, así como los implementadores, pueden
+encontrar en ella un recurso útil.</em></p>
+</div>
+
+<p>Los documentos HTML pueden contener reglas de hojas de estilo directamente,
+o bien pueden importar hojas de estilo.</p>
+
+<p>Se puede usar cualquier lenguaje de hojas de estilo con HTML. Un lenguaje
+simple de hojas de estilo puede ser suficiente para la mayoría de los usuarios,
+pero para otras necesidades más especializadas pueden ser apropiados otros
+lenguajes. Esta especificación utiliza para los ejemplos el lenguaje de estilo
+llamado "Hojas de Estilo en Cascada" ("Cascading Style Sheets", <a rel="biblioentry" href= 
+"../references.html#ref-CSS1" class="informref">[CSS1]</a>), abreviado CSS.</p>
+
+<p>La <a href="../types.html#type-style">sintaxis de los datos de estilo</a> depende
+del lenguaje de hojas de estilo.</p>
+
+<h3><a name="h-14.2.1">14.2.1</a> <span class="index-inst" title= 
+"default::style sheet language|style sheet 
+language::default|HTTP::Content-Style-Type header|Content-Style-Type header"><a
+name="default-style">Especificación del lenguaje de hojas de estilo por defecto</a></span></h3>
+
+<p>Los autores deben especificar el lenguaje de hojas de estilo de la
+información de estilo asociada con un documento HTML.</p>
+
+<p>Los autores deberían usar el elemento <a href="../struct/global.html#edef-META" class= 
+"noxref"><samp class="einst">META</samp></a> para especificar el lenguaje de hojas
+de estilo por defecto de un documento. Por ejemplo, para especificar que el valor
+por defecto es CSS, los autores deberían poner la siguiente declaración en la
+sección <a href="../struct/global.html#edef-HEAD" class="noxref"><samp class="einst">
+HEAD</samp></a> de sus documentos:</p>
+
+<pre>
+&lt;META http-equiv="Content-Style-Type" content="text/css"&gt;
+</pre>
+
+<p>El lenguaje de hojas de estilo por defecto también puede ser establecido
+con encabezados HTTP. La declaración <a href="../struct/global.html#edef-META"
+class="noxref"><samp class="einst">META</samp></a> de arriba es equivalente
+al encabezado HTTP siguiente:</p>
+
+<pre>
+Content-Style-Type: text/css
+</pre>
+
+<p>Los agentes de usuario deberían determinar el lenguaje de hojas de estilo
+por defecto de acuerdo con los siguientes pasos (ordenados de mayor a menor
+prioridad):</p>
+
+<ol>
+<li>Si alguna declaración <a href="../struct/global.html#edef-META" class="noxref"><samp
+class="einst">META</samp></a> especifica "Content-Style-Type",
+la última de ellas en el flujo de caracteres determina el lenguaje
+de hojas de estilo por defecto.</li>
+
+<li>De otro modo, si algún encabezado HTTP especifica "Content-Style-Type",
+el último de ellos en el flujo de caracteres determina el lenguaje
+de hojas de estilo por defecto.</li>
+
+<li>De otro modo, el lenguaje de hojas de estilo por defecto es "text/css".</li>
+</ol>
+
+<p>Los documentos que incluyan elementos que especifiquen el atributo <a href=
+"styles.html#adef-style" class="noxref"><samp class="ainst">style</samp></a>
+pero que no definan un lenguaje de hojas de estilo por defecto son incorrectos.
+Las <span class="index-inst" title="authoring tool::and default style sheet
+language"><a name="idx-authoring_tool">herramientas de creación</a></span> deberían
+generar información de lenguaje de hojas de estilo por defecto (normalmente
+una declaración <a href="../struct/global.html#edef-META" class="noxref"><samp class="einst">
+META</samp></a>) de modo que los agentes de usuario no tengan que atenerse
+al valor por defecto "text/css".</p>
+
+<h3><a name="h-14.2.2">14.2.2</a> <a name="style-element">Información de estilo en línea</a></h3>
+
+<div class="adef-list">
+<p><em>Definiciones de atributos</em></p>
+
+<dl>
+<dt><a name="adef-style"><samp class="adef">style</samp></a> = <a href= 
+"../types.html#type-style"><em>estilo</em></a> <a href= 
+"../types.html#case-neutral">[CN]</a></dt>
+
+<dd>Este atributo especifica información de estilo para el elemento actual.</dd>
+</dl>
+</div>
+
+<p><span class="index-inst" title="style sheet::inline rules"><a name= 
+"idx-style_sheet-4">La</a></span> <a href="../types.html#type-style">
+sintaxis</a> del valor del atributo <a href="styles.html#adef-style" class="noxref">
+<samp class="ainst">style</samp></a> viene determinada por el <a href= 
+"#default-style">lenguaje de hojas de estilo por defecto</a>. Por ejemplo, para
+los estilos [[CSS2]] en línea, se usa la sintaxis de bloque de declaraciones
+descrita en la sección 4.1.8 (sin las llaves).</p>
+
+<div class="example">
+<p>Este ejemplo CSS establece información sobre el color y el tamaño de la fuente
+del texto de un párrafo específico.</p>
+
+<pre>
+&lt;P style="font-size: 12pt; color: fuchsia"&gt;¿No son maravillosas las hojas de estilo?
+</pre>
+
+<p>En CSS, las declaraciones de propiedades son de la forma "nombre : valor" y
+están separadas por un punto y coma.</p>
+</div>
+
+<p>Para especificar información de estilo en línea para más de un elemento,
+los autores deberían usar el elemento <samp class="edef">STYLE</samp>.
+Para lograr una flexibilidad óptima, los autores deberían definir los estilos
+en hojas de estilo externas.</p>
+
+<h3><a name="h-14.2.3">14.2.3</a> <a name="style-group">Información de estilo
+en cabecera</a>: el elemento <a name="edef-STYLE"><samp class="edef">STYLE</samp></a></h3>
+
+<div class="dtd-fragment">
+<pre class="dtd-fragment">
+&lt;!ELEMENT <a href="styles.html#edef-STYLE" class="noxref"><samp class=
+"einst">STYLE</samp></a> - - <a href=
+"../sgml/dtd.html#StyleSheet">%StyleSheet</a>        -- información de estilo --&gt;
+&lt;!ATTLIST STYLE
+  <a href=
+"../sgml/dtd.html#i18n">%i18n;</a>                               -- <a href= 
+"../struct/dirlang.html#adef-lang">lang</a>, <a href= 
+"../struct/dirlang.html#adef-dir">dir</a>, para usar con title --
+  <a href="styles.html#adef-type-STYLE" class="noxref"><samp class=
+"ainst-STYLE">type</samp></a>        <a href=
+"../sgml/dtd.html#ContentType">%ContentType;</a>  #REQUIRED -- tipo de contenido del lenguaje de estilos --
+  <a href="styles.html#adef-media" class="noxref"><samp class=
+"ainst-STYLE">media</samp></a>       <a href=
+"../sgml/dtd.html#MediaDesc">%MediaDesc;</a>    #IMPLIED  -- diseñado para usar con estos medios --
+  <a href="../struct/global.html#adef-title" class="noxref"><samp class= 
+"ainst-STYLE">title</samp></a>       <a href=
+"../sgml/dtd.html#Text">%Text;</a>         #IMPLIED  -- título consultivo --
+  &gt;
+</pre>
+</div>
+
+<p><em>Etiqueta inicial: <strong>obligatoria</strong>, Etiqueta final: <strong>
+obligatoria</strong></em></p>
+
+<div class="adef-list">
+<p><em>Definiciones de atributos</em></p>
+
+<dl>
+<dt><a name="adef-type-STYLE"><samp class="adef">type</samp></a> = <a href= 
+"../types.html#type-content-type"><em>tipo de contenido</em></a> <a href= 
+"../types.html#case-insensitive">[CI]</a></dt>
+
+<dd>Este atributo especifica el lenguaje de hojas de estilo de los contenidos
+del elemento y prevalece sobre el lenguaje de hojas de estilo por defecto. El
+lenguaje de hojas de estilo se especifica como un tipo de contenido (p.ej.,
+"text/css"). Los autores deben proporcionar un valor para este atributo; no
+hay valor por defecto para este atributo.</dd>
+
+<dt><a name="adef-media"><samp class="adef">media</samp></a> = <a href= 
+"../types.html#type-media-descriptors"><em>descriptores de medios</em></a> <a href= 
+"../types.html#case-insensitive">[CI]</a></dt>
+
+<dd>Este atributo especifica el medio destino al que se dirige la información
+de estilo. Puede ser un solo descriptor de medios, o una lista de ellos separados
+por comas. El valor por defecto de este atributo es "screen" (pantalla).</dd>
+</dl>
+</div>
+
+<div class="aref-list">
+<p><em>Atributos definidos en otros lugares</em></p>
+
+<ul>
+<li><a href="../struct/dirlang.html#adef-lang" class="noxref"><samp class=
+"ainst">lang</samp></a> (<a href=
+"../struct/dirlang.html#language-info">información sobre el idioma</a>), <a href= 
+"../struct/dirlang.html#adef-dir" class="noxref"><samp class="ainst">
+dir</samp></a> (<a href="../struct/dirlang.html#bidirection">dirección
+del texto</a>)</li>
+
+<li><a href="../struct/global.html#adef-title" class="noxref"><samp class=
+"ainst">title</samp></a> (<a href="../struct/global.html#title">título del
+elemento</a>)</li>
+</ul>
+</div>
+
+<p>El elemento <a href="styles.html#edef-STYLE" class="noxref"><samp class="einst">
+STYLE</samp></a> permite a los autores poner reglas de hojas de estilo en la <span
+class="index-inst" title="style sheet::rules in HEAD"><a name=
+"idx-style_sheet-5">cabecera</a></span> del documento. HTML permite cualquier
+número de elementos
+<a href="styles.html#edef-STYLE" class="noxref"><samp class="einst">
+STYLE</samp></a> en la sección <a href="../struct/global.html#edef-HEAD"
+class="noxref"><samp class="einst">HEAD</samp></a> de un documento.</p>
+
+<p>Los agentes de usuario que no soporten hojas de estilo, o que no soporten
+el lenguaje de hojas de estilo utilizado por un elemento <a href="styles.html#edef-STYLE" class="noxref">
+<samp class="einst">STYLE</samp></a> en particular, deben ocultar los contenidos
+del elemento <a
+href="styles.html#edef-STYLE" class="noxref"><samp class="einst">
+STYLE</samp></a>. <span class="index-inst" title="error::rendering 
+style rules in STYLE"><a name="idx-error">Es un error</a></span> representar
+el contenido como parte del texto del documento. Algunos lenguajes de hojas
+de estilo soportan sintaxis para <a href="#hiding">ocultar el contenido</a>
+a agentes de usuarios no conformes.</p>
+
+<p>La <a href="../types.html#type-style">sintaxis de los datos de estilo</a>
+depende del lenguaje de hojas de estilo.</p>
+
+<p>Algunas implementaciones de hojas de estilo pueden permitir una gama
+más amplia de reglas en el elemento
+<a href="styles.html#edef-STYLE" class="noxref"><samp class="einst">
+STYLE</samp></a> que en el atributo <a href="styles.html#adef-style" class= 
+"noxref"><samp class="ainst">style</samp></a>. Por ejemplo, con CSS,
+pueden declararse reglas dentro de un elemento <a href="styles.html#edef-STYLE" class="noxref">
+<samp class="einst">STYLE</samp></a> para:</p>
+
+<ul>
+<li>Todas las apariciones de un elemento de HTML específico (p.ej., todos los
+elementos <a href= 
+"../struct/text.html#edef-P" class="noxref"><samp class="einst">P</samp></a>,
+todos los elementos <a href="../struct/global.html#edef-H1" class="noxref"><samp
+class="einst">H1</samp></a>, etc.)</li>
+
+<li>Todas las apariciones de un elemento de HTML que pertenezcan a una clase
+específica (es decir, cuyo atributo 
+<a href="../struct/global.html#adef-class" class="noxref"><samp class="ainst">
+class</samp></a> tome cierto valor).</li>
+
+<li>Las apariciones únicas de un elemento de HTML (es decir, cuyo atributo <a href= 
+"../struct/global.html#adef-id" class="noxref"><samp class="ainst">
+id</samp></a> tome cierto valor).</li>
+</ul>
+
+<p>Las reglas de precedencia y herencia de las reglas de estilo dependen
+del lenguaje de hojas de estilo.</p>
+
+<div class="example">
+<p>La siguiente declaración <a href="styles.html#edef-STYLE" class="noxref"><samp
+class="einst">STYLE</samp></a> CSS pone un borde alrededor de todos los elementos <a href= 
+"../struct/global.html#edef-H1" class="noxref"><samp class="einst">
+H1</samp></a> del documento y los centra en la página.</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css"&gt;
+   H1 {border-width: 1px; border: solid; text-align: center}
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+</pre>
+
+<p>Para especificar que esta información de estilo sólo debería aplicarse
+a los elementos <a href= 
+"../struct/global.html#edef-H1" class="noxref"><samp class="einst">
+H1</samp></a> de una clase específica, la modificamos como sigue:</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css"&gt;
+   H1.miclase {border-width: 1px; border: solid; text-align: center}
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+ &lt;H1 class="miclase"&gt; Este H1 está afectado por nuestro estilo &lt;/H1&gt;
+ &lt;H1&gt; Este no está afectado por nuestro estilo &lt;/H1&gt;
+&lt;/BODY&gt;
+</pre>
+
+<p>Finalmente, para limitar el alcance de la información de estilo a una
+sola aparición de <a href="../struct/global.html#edef-H1" class="noxref"><samp class="einst">
+H1</samp></a>, establecemos el atributo <a href="../struct/global.html#adef-id" class="noxref">
+<samp class="ainst">id</samp></a>:</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css"&gt;
+   #miid {border-width: 1px; border: solid; text-align: center}
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+ &lt;H1 class="miclase"&gt; Este H1 no está afectado &lt;/H1&gt;
+ &lt;H1 id="miid"&gt; Este H1 está afectado por el estilo &lt;/H1&gt;
+ &lt;H1&gt; Este H1 no está afectado &lt;/H1&gt;
+&lt;/BODY&gt;
+</pre>
+</div>
+
+<p><span class="index-inst" title="style sheet::used with DIV and SPAN"><a
+name="idx-style_sheet-6">Aunque se puede especificar información de estilo</a></span>
+prácticamente para cualquier elemento, hay dos elementos, <a href=
+"../struct/global.html#edef-DIV" class="noxref"><samp class="einst">
+DIV</samp></a> y <a href="../struct/global.html#edef-SPAN" class="noxref">
+<samp class="einst">SPAN</samp></a>, que son particularmente útiles en el sentido
+de que no imponen ningún significado presentacional (aparte de la distinción
+<a href="../struct/global.html#block-inline">en bloque/en línea</a>).
+Combinados con hojas de estilo, estos elementos permiten a los usuarios
+extender el HTML indefinidamente, en especial si se utilizan junto con
+los atributos <a href="../struct/global.html#adef-class"
+class="noxref"><samp class="ainst">class</samp></a> e <a href= 
+"../struct/global.html#adef-id" class="noxref"><samp class="ainst">
+id</samp></a>.</p>
+
+<div class="example">
+<p>En el siguiente ejemplo, utilizamos el elemento <a href=
+"../struct/global.html#edef-SPAN" class="noxref"><samp class="einst">
+SPAN</samp></a> para especificar que el estilo de fuente de las primeras
+palabras de un párrafo sea versalitas ("small-caps").</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css"&gt;
+  SPAN.ver-ex { font-variant: small-caps }
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+  &lt;P&gt;&lt;SPAN class="ver-ex"&gt;Las primeras&lt;/SPAN&gt; palabras
+  de este párrafo van en versalitas.
+&lt;/BODY&gt;
+</pre>
+</div>
+
+<div class="example">
+<p>En el siguiente ejemplo, utilizamos el elemento <a href="../struct/global.html#edef-DIV"
+class="noxref"><samp class="einst">DIV</samp></a> y el atributo <a href= 
+"../struct/global.html#adef-class" class="noxref"><samp class="ainst">
+class</samp></a> para establecer la justificación del texto de una serie
+de párrafos que constituyen el abstracto de un artículo científico. Esta
+información de estilo podría reutilizarse para otras secciones de abstracto
+especificando el valor correspondiente del atributo <a
+href="../struct/global.html#adef-class" class="noxref"><samp class="ainst">
+class</samp></a> en cualquier otro lugar del documento.</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css"&gt;
+   DIV.Abstracto { text-align: justify }
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+ &lt;DIV class="Abstracto"&gt;
+   &lt;P&gt;La gama de productos Gran Jefe es nuestra apuesta
+     para el año que viene. Este informe sienta las bases
+     para confrontar a Gran Jefe con los productos de la
+     competencia.
+
+   &lt;P&gt;Gran Jefe reemplaza a nuestra gama "Commander",
+     si bien ésta seguirá de momento en catálogo.
+ &lt;/DIV&gt;
+&lt;/BODY&gt;
+</pre>
+</div>
+
+<h3><a name="h-14.2.4">14.2.4</a> <span class="index-inst" title="media::used 
+with style sheets|style sheet::target media for"><a name="media-types">Tipos
+de medios</a></span></h3>
+
+<p>HTML permite a los autores diseñar documentos que saquen partido
+de las características de los medios en los que el documento vaya a ser
+representado (p.ej., pantallas gráficas, pantallas de televisión,
+dispositivos de mano, navegadores basados en voz, dispositivos táctiles
+Braille, etc.). Al especificar el atributo <a href= 
+"styles.html#adef-media" class="noxref"><samp class="ainst">media</samp></a>,
+los autores permiten a los agentes de usuario cargar y aplicar las hojas
+de estilo de manera selectiva. Consulte la lista de <a href= 
+"../types.html#type-media-descriptors">descriptores de medios</a> reconocidos.</p>
+
+<div class="example">
+<p>Las siguientes declaraciones de ejemplo se aplican a elementos <a href= 
+"../struct/global.html#edef-H1" class="noxref"><samp class="einst">
+H1</samp></a>. Cuando se proyecten en una reunión de negocios, todos
+ellos aparecerán en azul. Cuando se impriman, aparecerán centrados.</p>
+
+<pre>
+&lt;HEAD&gt;
+ &lt;STYLE type="text/css" media="projection"&gt;
+    H1 { color: blue }
+ &lt;/STYLE&gt;
+
+ &lt;STYLE type="text/css" media="print"&gt;
+   H1 { text-align: center }
+ &lt;/STYLE&gt;
+</pre>
+
+<p>Este ejemplo añade efectos de sonido a los vínculos para su uso en salidas por voz:</p>
+
+<pre>
+ &lt;STYLE type="text/css" media="aural"&gt;
+   A { cue-before: uri(bell.aiff); cue-after: uri(dong.wav)}
+ &lt;/STYLE&gt;
+&lt;/HEAD&gt;
+</pre>
+</div>
+
+<p>El control de medios es particularmente interesante cuando se aplica
+a hojas de estilo externas, ya que los agentes de usuario pueden ahorrar
+tiempo si obtienen de la red únicamente aquellas hojas de estilo que se
+apliquen el dispositivo actual. Por ejemplo, los navegadores basados en voz
+pueden evitar la descarga de hojas de estilo diseñadas para la representación
+visual. Veáse la sección sobre <a href="#media-cascades">cascadas dependientes
+del medio</a> para más información.</p>
+
+<h2><a name="h-14.3">14.3</a> <span class="index-inst" title="style 
+sheet::external"><a name="style-external">Hojas de estilo externas</a></span></h2>
+
+<p>Los autores pueden separar las hojas de estilo de los documentos HTML.
+Esto ofrece varias ventajas:</p>
+
+<ul>
+<li>Los autores y los administradores de sitios web pueden compartir
+hojas de estilo entre varios documentos (y sitios).</li>
+
+<li>Los autores pueden cambiar la hoja de estilo sin necesidad de hacer
+modificaciones en el documento.</li>
+
+<li>Los agentes de usuario pueden cargar hojas de estilo selectivamente
+(en función de los descriptores de medios).</li>
+</ul>
+
+<h3><a name="h-14.3.1">14.3.1</a> Hojas de estilo preferentes y alternativas</h3>
+
+<p>HTML permite a los autores asociar cualquier número de hojas de estilo
+externas a un documento. El lenguaje de hojas de estilo define el modo en
+que interaccionan varias hojas de estilo (por ejemplo, las reglas de "cascada"
+de CSS).</p>
+
+<p><span class="index-def" title="style sheet::alternate|alternate style
+sheets"><a name="didx-style_sheet">Los autores pueden especificar cualquier
+número de hojas de estilo mutuamente excluyentes llamadas hojas de estilo
+<dfn>alternativas</dfn>.</a></span> Los usuarios pueden seleccionar su hoja
+favorita según sus preferencias. Por ejemplo, un autor puede especificar una hoja
+de estilo diseñada para pantallas pequeñas y otra para usuarios con poca visión
+(p.ej., con fuentes grandes). Los agentes de usuario deberían permitir a los
+usuarios seleccionar las hojas de estilo alternativas.</p>
+
+<p><span class="index-def" title="style sheet::preferred|preferred style
+sheets"><a name="didx-style_sheet-1">El autor puede especificar que una de
+las alternativas es una hoja de estilo <dfn>preferente</dfn>.</a></span>
+Los agentes de usuario deberían aplicar la hoja de estilo preferente del
+autor a menos que el usuario haya seleccionado una alternativa diferente.</p>
+
+<p>Los autores pueden agrupar varias hojas de estilo alternativas (incluyendo
+las hojas de estilo preferentes del autor) bajo un <dfn>nombre de estilo</dfn>
+común. Cuando un usuario selecciona un nombre de estilo, el agente de usuario
+debe aplicar todas las hojas de estilo con ese nombre. Los agentes de usuario
+no deben aplicar hojas de estilo alternativas con un nombre de estilo
+diferente. La sección sobre <a href="#specifying-external">especificación de
+hojas de estilo externas</a> explica cómo dar un nombre a un grupo de hojas
+de estilo.</p>
+
+<p><span class="index-def" title="style sheet::persistent|persistent style 
+sheets"><a name="didx-style_sheet-2">Los autores también pueden especificar
+hojas de estilo <dfn>persistentes</dfn> que los agentes de usuario deben
+aplicar además de cualquier hoja de estilo alternativa.</a></span></p>
+
+<p>Los agentes de usuario deben respetar los <a href="../types.html#type-media-descriptors">
+descriptores de medios</a> al aplicar cualquier hoja de estilo.</p>
+
+<p>Los agentes de usuario también deberían permitir a los usuarios
+deshabilitar completamente las hojas de estilo del autor, en cuyo caso
+el agente de usuario no debería aplicar ninguna hoja de estilo persistente
+ni alternativa.</p>
+
+<h3><a name="h-14.3.2">14.3.2</a> <span class="index-inst" title="style 
+sheet::specification of external|link::and external style sheets"><a name= 
+"specifying-external">Especificación de hojas de estilo externas</a></span></h3>
+
+<p>Los autores especifican hojas de estilo externas mediante los siguientes
+atributos del elemento <a href="../struct/links.html#edef-LINK" class="noxref">
+<samp class="einst">LINK</samp></a>:</p>
+
+<ul>
+<li>Haciendo el valor de <a href="../struct/links.html#adef-href" class="noxref">
+<samp class="ainst">href</samp></a> igual a la localización del fichero de la
+hoja de estilo. El valor de <a href="../struct/links.html#adef-href" class="noxref"><samp
+class="ainst">href</samp></a> es un <a href="../types.html#type-uri">
+URI</a>.</li>
+
+<li>Haciendo que el valor del atributo <a href="../struct/links.html#adef-type-A" class= 
+"noxref"><samp class="ainst-A">type</samp></a> indique el lenguaje del recurso
+(hoja de estilo) vinculado. Esto permite al agente de usuario evitar la
+descarga de una hoja de estilo cuyo lenguaje no soporte.</li>
+
+<li>Especificando si la hoja de estilo es persistente, preferente, o alternativa:
+
+<ul>
+<li>Para hacer una hoja de estilo persistente, se hace el atributo <a href= 
+"../struct/links.html#adef-rel" class="noxref"><samp class="ainst">
+rel</samp></a> igual a "stylesheet" y no se establece el atributo <a href= 
+"../struct/global.html#adef-title" class="noxref"><samp class="ainst">
+title</samp></a>.</li>
+
+<li>Para hacer una hoja de estilo preferente, se hace el atributo <a href= 
+"../struct/links.html#adef-rel" class="noxref"><samp class="ainst">
+rel</samp></a> igual a "stylesheet" y se da un nombre a la hoja de estilo
+mediante el atributo <a
+href="../struct/global.html#adef-title" class="noxref"><samp class="ainst">
+title</samp></a>.</li>
+
+<li>Para especificar una hoja de estilo alternativa, se hace el atributo <a href= 
+"../struct/links.html#adef-rel" class="noxref"><samp class="ainst">
+rel</samp></a> igual a "alternate stylesheet" y se da un nombre a la hoja
+de estilo mediante el atributo
+<a href="../struct/global.html#adef-title" class="noxref"><samp class= 
+"ainst">title</samp></a>.</li>
+</ul>
+</li>
+</ul>
+
+<p>Los agentes de usuario deberían posibilitar a los usuarios ver la
+lista de estilos alternativos y escoger uno de ellos. Se recomienda que
+el nombre de cada opción sea el valor del atributo <a href=
+"../struct/global.html#adef-title" class="noxref"><samp class="ainst">
+title</samp></a>.</p>
+
+<div class="example">
+<p>En este ejemplo, especificamos en primer lugar una hoja de estilo
+persistente localizada en el fichero <tt>miestilo.css</tt>:</p>
+
+<pre>
+&lt;LINK href="miestilo.css" rel="stylesheet" type="text/css"&gt;
+</pre>
+
+<p>Si establecemos el atributo <a href="../struct/global.html#adef-title" class="noxref"><samp
+class="ainst">title</samp></a> la convertimos en la hoja de estilo preferente
+del autor:</p>
+
+<pre>
+ &lt;LINK href="miestilo.css" title="compacto" rel="stylesheet" type="text/css"&gt;
+</pre>
+
+<p>Si añadimos la palabra clave "alternate" al atributo <a href=
+"../struct/links.html#adef-rel" class="noxref"><samp class="ainst">
+rel</samp></a> la convertimos en una hoja de estilo alternativa:</p>
+
+<pre>
+&lt;LINK href="miestilo.css" title="Medium" rel="alternate stylesheet" type="text/css"&gt;
+</pre>
+</div>
+
+<p>Para más información sobre hojas de estilo externas, consulte la
+sección sobre
+<a href="../struct/links.html#linksandss">vínculos y hojas de estilo
+externas.</a></p>
+
+<p><span class="index-inst" title="HTTP::Default-Style header|style 
+sheet::specification of preferred">Los autores también pueden usar el
+elemento <a name=
+"idx-HTTP-1" href="../struct/global.html#edef-META" class="noxref"><samp class= 
+"einst">META</samp></a> para establecer la hoja de estilo preferente del
+documento.</span> Por ejemplo, para especificar que la hoja de estilo
+preferente sea "compacto" (ver el ejemplo precedente), los autores pueden
+incluir la siguiente línea en el <a href= 
+"../struct/global.html#edef-HEAD" class="noxref"><samp class="einst">
+HEAD</samp></a>:</p>
+
+<div class="example">
+<pre>
+&lt;META http-equiv="Default-Style" content="compacto"&gt;
+</pre>
+</div>
+
+<p>La hoja de estilo preferente también se puede especificar mediante
+encabezados HTTP. La declaración
+<a href="../struct/global.html#edef-META" class="noxref"><samp class="einst">
+META</samp></a> precedente es equivalente a este encabezado HTTP:</p>
+
+<div class="example">
+<pre>
+Default-Style: "compacto"
+</pre>
+</div>
+
+<p>Si hay dos o más declaraciones <a href="../struct/global.html#edef-META" class="noxref">
+<samp class="einst">META</samp></a> o encabezados HTTP que especifiquen
+la hoja de estilo preferente, la que prevalece es la última. A estos
+efectos, se considera que los encabezados HTTP aparecen antes que la
+sección <a href= 
+"../struct/global.html#edef-HEAD" class="noxref"><samp class="einst">
+HEAD</samp></a> del documento.</p>
+
+<p>Si hay dos o más elementos <a href="../struct/links.html#edef-LINK" class="noxref"><samp
+class="einst">LINK</samp></a> que especifiquen una hoja de estilo preferente,
+el que prevalece es el primero.</p>
+
+<p>Las hojas de estilo preferentes especificadas con un elemento <a href= 
+"../struct/global.html#edef-META" class="noxref"><samp class="einst">
+META</samp></a> o con encabezados HTTP prevalecen sobre las especificadas
+con el elemento
+<a href="../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a>.</p>
+
+<h2><a name="h-14.4">14.4</a> <span class="index-inst" title="style 
+sheet::cascading|cascading style sheets"><a name="idx-style_sheet-11">Hojas de
+Estilo en Cascada</a></span></h2>
+
+<p>Los lenguajes de hojas de estilo en <dfn>cascada</dfn>, tales como CSS,
+permiten que se pueda combinar la información de varias fuentes. Sin embargo,
+no todos los lenguajes de hojas de estilo soportan la cascada. Para definir
+una cascada, los autores especifican una secuencia de elementos
+<a href="../struct/links.html#edef-LINK" class="noxref"><samp
+class="einst">LINK</samp></a> y/o <a href="styles.html#edef-STYLE" class= 
+"noxref"><samp class="einst">STYLE</samp></a>. La información de estilo
+se combina en cascada según el orden en que aparecen los elementos en la
+sección <a href= 
+"../struct/global.html#edef-HEAD" class="noxref"><samp class="einst">
+HEAD</samp></a>.</p>
+
+<div class="note">
+<p><em><strong>Nota.</strong> Esta especificación no especifica cómo se
+combinan en cascada hojas de estilo de lenguajes de hojas de estilo distintos.
+Los autores deberían evitar mezclar lenguajes de hojas de estilo.</em></p>
+</div>
+
+<div class="example">
+<p>En el siguiente ejemplo, especificamos dos hojas de estilo alternativas
+llamadas "compacto". Si el usuario selecciona el estilo "compacto", el agente
+de usuario debe aplicar ambas hojas de estilo externas, así como la hoja
+de estilo persistente "comun.css". Si el usuario selecciona el estilo
+"tipos grandes", sólo se aplicarán la hoja de estilo alternativa "tgrandes.css"
+y "comun.css".</p>
+
+<pre>
+&lt;LINK rel="alternate stylesheet" title="compacto"
+      href="peq-base.css" type="text/css"&gt;
+&lt;LINK rel="alternate stylesheet" title="compacto"
+      href="peq-extras.css" type="text/css"&gt;
+&lt;LINK rel="alternate stylesheet" title="tipos grandes"
+      href="tgrandes.css" type="text/css"&gt;
+&lt;LINK rel="stylesheet" href="comun.css" type="text/css"&gt;
+</pre>
+</div>
+
+<div class="example">
+<p>Aquí tenemos un ejemplo de cascada que incluye tanto al elemento
+<a href="../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a> como al <a href="styles.html#edef-STYLE" class="noxref"><samp
+class="einst">STYLE</samp></a>.</p>
+
+<pre>
+&lt;LINK rel="stylesheet" href="empresa.css" type="text/css"&gt;
+&lt;LINK rel="stylesheet" href="informe.css" type="text/css"&gt;
+&lt;STYLE type="text/css"&gt;
+    p.especial { color: rgb(230, 100, 180) }
+&lt;/STYLE&gt;
+</pre>
+</div>
+
+<h3><a name="h-14.4.1">14.4.1</a> <span class="index-inst" title="media::and 
+external style sheets|link::and media-dependent style sheets"><a name= 
+"media-cascades">Cascadas dependientes del medio</a></span></h3>
+
+<p>Una cascada puede incluir hojas de estilo aplicables a medios diferentes.
+Tanto <a href="../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a> como <a href="styles.html#edef-STYLE" class="noxref"><samp
+class="einst">STYLE</samp></a> pueden usarse con el atributo <a href= 
+"styles.html#adef-media" class="noxref"><samp class="ainst">media</samp></a>.
+El agente de usuario es por tanto responsable de filtrar aquellas hojas de estilo
+que no se apliquen al medio actual.</p>
+
+<div class="example">
+<p>En el siguiente ejemplo, definimos un cascada en la cual se incluyen varias
+versiones de la hoja de estilo "empresa": una diseñada para su impresión,
+otra para la pantalla y otra para navegadores basados en voz (útil, por ejemplo,
+para leer correo electrónico en el coche). La hoja de estilo "informe" se
+aplica a todos los medios. La regla de color definida por el elemento
+<a href="styles.html#edef-STYLE" class="noxref"><samp class="einst">
+STYLE</samp></a> se usa para impresoras y pantallas, pero no para la representación
+auditiva.</p>
+
+<pre>
+&lt;LINK rel="stylesheet" media="aural" href="empresa-aural.css" type="text/css"&gt;
+&lt;LINK rel="stylesheet" media="screen" href="empresa-screen.css" type="text/css"&gt;
+&lt;LINK rel="stylesheet" media="print" href="empresa-print.css" type="text/css"&gt;
+&lt;LINK rel="stylesheet" href="informe.css" type="text/css"&gt;
+&lt;STYLE media="screen, print" type="text/css"&gt;
+    p.especial { color: rgb(230, 100, 180) }
+&lt;/STYLE&gt;
+</pre>
+</div>
+
+<h3><a name="h-14.4.2">14.4.2</a> Herencia y cascada</h3>
+
+<p>Cuando el agente de usuario quiere representar un documento, necesita
+encontrar valores para las propiedades de estilo, p.ej., la familia
+tipográfica, el tamaño de fuente, la altura de línea, el color del texto,
+etc. El mecanismo exacto depende del lenguaje de la hoja de estilo, pero
+en general es válida la descripción siguiente:</p>
+
+<p>Se utiliza el mecanismo de cascada cuando varias reglas de estilo
+se aplican directamente a un mismo elemento. El mecanismo permite al
+agente de usuario ordenar las reglas según su especificidad para determinar
+la regla a aplicar. Si no encuentra ninguna regla, el siguiente paso depende
+de si la propiedad de estilo puede ser heredada o no. No todas las propiedades
+se heredan. Para estas propiedades el lenguaje de la hoja de estilo proporciona
+unos valores por defecto que son los que se usan cuando no hay reglas
+explícitas para un elemento en particular.</p>
+
+<p>Si la propiedad puede ser heredada, el agente de usuario examina el
+elemento contenedor inmediato para ver si hay alguna regla que se aplique a él.
+Este proceso continúa hasta que se encuentra alguna regla aplicable. Este
+mecanismo permite que las hojas de estilo puedan definirse de una manera compacta.
+Por ejemplo, los autores pueden especificar la familia tipográfica de
+todos los elementos contenidos en <a href="../struct/global.html#edef-BODY" class="noxref">
+<samp class="einst">BODY</samp></a> con una sola regla que se aplique al
+elemento <a href="../struct/global.html#edef-BODY" class="noxref"><samp class="einst">
+BODY</samp></a>.</p>
+
+<h2><a name="h-14.5">14.5</a> <span class="index-inst" title="user agent::and 
+style data|style sheet::comments to hide|comments::used to hide style sheet
+data"><a name="hiding">Ocultar datos de estilo a los agentes de usuario</a></span></h2>
+
+<p>Algunos lenguajes de hojas de estilo soportan sintaxis pensada para
+permitir a los autores ocultar el contenido de los elementos <a href="styles.html#edef-STYLE" class="noxref"><samp class= 
+"einst">STYLE</samp></a> a los agentes de usuario no conformes.</p>
+
+<div class="example">
+<p>Este ejemplo ilustra cómo comentar en CSS el contenido de los elementos <a href= 
+"styles.html#edef-STYLE" class="noxref"><samp class="einst">STYLE</samp></a>
+para asegurarse de que los agentes de usuario antiguos y no conformes no
+lo representarán como texto.</p>
+
+<pre>
+&lt;STYLE type="text/css"&gt;
+&lt;!--
+   H1 { color: red }
+   P  { color: blue}
+   --&gt;
+&lt;/STYLE&gt;
+</pre>
+</div>
+
+<h2><a name="h-14.6">14.6</a> <span class="index-inst" title="HTTP::used to 
+link external style sheets"><a name="idx-HTTP-2">Vinculación de hojas de estilo
+mediante encabezados HTTP</a></span></h2>
+
+<p><em>Esta sección sólo se aplica a los agentes de usuario conformes con
+las versiones de HTTP que definan un campo de encabezado Link. Obsérvese que
+HTTP 1.1, tal y como se define en <a rel= 
+"biblioentry" href="../references.html#ref-RFC2616" class="informref">
+[RFC2616]</a>, no incluye un campo de encabezado Link (ver sección
+19.6.3).</em></p>
+
+<p>Los administradores de servidores web pueden creer conveniente configurar
+un servidor de modo que una hoja de estilo se aplique a un grupo de páginas.
+El encabezado HTTP <tt>Link</tt> tiene el mismo efecto que un elemento <a href="../struct/links.html#edef-LINK" class=
+"noxref"><samp class="einst">LINK</samp></a> con los mismos atributos y
+valores. Varios encabezados <tt>Link</tt> corresponderían a varios elementos <a href= 
+"../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a> que aparecieran en el mismo orden. Por ejemplo,</p>
+
+<pre>
+Link: &lt;http://www.acme.com/empresa.css&gt;; REL=stylesheet
+</pre>
+
+<p>corresponde a:</p>
+
+<pre>
+&lt;LINK rel="stylesheet" href="http://www.acme.com/empresa.css"&gt;
+</pre>
+
+<p>Es posible especificar varias hojas de estilo alternativas
+especificando varios encabezados <tt>Link</tt>, y a continuación
+utilizar el atributo <a href="../struct/links.html#adef-rel"
+class="noxref"><samp class="ainst">rel</samp></a> para determinar el
+estilo por defecto.</p>
+
+<div>
+<p>En el ejemplo siguiente, se aplica "compacto" por defecto, ya que
+omite la palabra clave "alternate" del atributo <a href="../struct/links.html#adef-rel" class= 
+"noxref"><samp class="ainst">rel</samp></a>.</p>
+
+<pre>
+Link: &lt;compacto.css&gt;; rel="stylesheet"; title="compacto"
+Link: &lt;tgrandes.css&gt;; rel="alternate stylesheet"; title="tipos grandes"
+</pre>
+</div>
+
+<p>Esto debería funcionar cuando se envían documentos HTML por
+correo electrónico. Algunos agentes de correo pueden alterar el
+orden de los encabezados de <a rel="biblioentry" href= 
+"../references.html#ref-RFC822" class="informref">[RFC822]</a>.
+Para evitar que esto afecte al orden de cascada de las hojas de
+estilo especificadas con encabezados <tt>Link</tt>, los autores pueden
+usar la concatenación de encabezados para combinar varias apariciones del
+mismo campo de encabezado. Las comillas sólo se necesitan si los valores
+de los atributos contienen algún espacio en blanco. Utilice entidades
+SGML para hacer referencia a caracteres que no se permitan en encabezados
+de HTML o de correo electrónico, o que sean susceptibles de resultar
+afectados por el tránsito a lo largo de la red.</p>
+
+<p>Los elementos <a href="../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a> y <a href="../struct/global.html#edef-META" class="noxref">
+<samp class="einst">META</samp></a> declarados implícitamente por
+encabezados HTTP aparecen antes de cualquier elemento explícito <a href=
+"../struct/links.html#edef-LINK" class="noxref"><samp class="einst">
+LINK</samp></a> o <a href="../struct/global.html#edef-META" class="noxref">
+<samp class="einst">META</samp></a> en el <a href= 
+"../struct/global.html#edef-HEAD" class="noxref"><samp class="einst">
+HEAD</samp></a> del documento.</p>
+
+<div class="navbar" align="center">
+<hr>
+<a href="../struct/objects.html">anterior</a>&nbsp;
+<a href="graphics.html">siguiente</a>&nbsp;
+<a href="../cover.html#minitoc">contenidos</a>&nbsp;
+<a href="../index/elements.html">elementos</a>&nbsp;
+<a href="../index/attributes.html">atributos</a>&nbsp;
+<a href="../index/list.html">índice</a>
+</div>
+</body>
+</html>
+
