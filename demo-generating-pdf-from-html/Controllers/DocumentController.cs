@@ -37,7 +37,6 @@ namespace demo_generating_pdf_from_html.Controllers
             }
 
             ms.Position = 0;
-            var myBinary = ms.ToArray();
             await ms.FlushAsync();
             return ms;
         }
